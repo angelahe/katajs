@@ -31,3 +31,11 @@ describe([String with Test Group Name], function() {
 
 describe - group similar tests
 it - contains test code
+
+### assert module functions
+assert.notStrictEqual(<value to test>, <value expected>)
+  if both arguments are the same, throws error
+assert.strictEqual(<value to test>, <value expected>)
+  checks for equality - fail if not exactly the same
+assert.deepStrictEqual(todos.list(), [{title: "run code", completed: false}])
+  recursively test that expected and actual objects have same properties
