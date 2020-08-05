@@ -1,0 +1,31 @@
+{
+  "name": "katajs",
+  "version": "1.0.0",
+  "description": "code katas in javascript with mocha",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angelahe/katajs.git"
+  },
+  "keywords": [
+    "test",
+    "kata",
+    "javascript",
+    "mocha"
+  ],
+  "author": "Angela Henders \\ <angela@aviak.ca\\> (https://aviak.ca)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angelahe/katajs/issues"
+  },
+  "homepage": "https://github.com/angelahe/katajs#readme",
+  "devDependencies": {
+    "mocha": "^8.1.1"
+  }
+}
