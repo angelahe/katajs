@@ -41,3 +41,18 @@ assert.deepStrictEqual(todos.list(), [{title: "run code", completed: false}])
   recursively test that expected and actual objects have same properties
 assert.throws(<function that has the code that throws the error>, <expected error string>)
   verify errors are thrown as expected
+
+### asynchronous tests with callbacks
+it("should save a single TODO", function(done) {
+  done() callback to know the function completed
+assert.strictEqual(fs.existsSync('todos.csv'), true);
+  assert the file exists, returns true if file path in its argument exists, false otherwise
+readFileSync() - to read the file synchronously
+  end the test with call to done() callback, so Mocha knows to stop testing that case
+done(err); 
+  fail the test if an error occurred
+  
+## side note
+fs module functions are asyncronous by default, but have synchronous counterparts
+that end with Sync in their name
+readFileSync returns a buffer object (binary data) so use toString so can compare
