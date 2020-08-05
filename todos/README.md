@@ -39,3 +39,5 @@ assert.strictEqual(<value to test>, <value expected>)
   checks for equality - fail if not exactly the same
 assert.deepStrictEqual(todos.list(), [{title: "run code", completed: false}])
   recursively test that expected and actual objects have same properties
+assert.throws(<function that has the code that throws the error>, <expected error string>)
+  verify errors are thrown as expected
