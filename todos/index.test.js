@@ -1,6 +1,7 @@
 const Todos = require('./index');
 const assert = require('assert').strict;
 const fs = require('fs');
+/*const fsp = require('fs').promises; */
 
 describe("integration test", function() {
   it("should be able to add and complete TODOs", function() {
@@ -32,25 +33,50 @@ describe("integration test", function() {
 
 describe("complete()", function() {
   it("should fail if there are no TODOs", function() {
-      let todos = new Todos();
-      const expectedError = new Error("You have no TODOs stored. Why don't you add one first?");
+    let todos = new Todos();
+    const expectedError = new Error("You have no TODOs stored. Why don't you add one first?");
 
-      assert.throws(() => {
-          todos.complete("doesn't exist");
-      }, expectedError);
+    assert.throws(() => {
+        todos.complete("doesn't exist");
+    }, expectedError);
   });
 });
 
 describe("saveToFile()", function() {
   it("should save a single TODO", function(done) {
+    let todos = new Todos();
+    todos.add("save a CSV");
+    todos.saveToFile((err) => {
+      assert.strictEqual(fs.existsSync('todos.csv'), true);
+      let expectedFileContents = "Title,Completed\nsave a CSV,false\n";
+      let content = fs.readFileSync("todos.csv").toString();
+      assert.strictEqual(content, expectedFileContents);
+      done(err);
+    });
+  });
+});
+
+describe("saveToFileBetter()", function() {
+  it("better - should save a single TODO using promise", function() {
+    let todos = new Todos();
+    todos.add("save a CSV");
+    return todos.saveToFileBetter().then(() => {
+      assert.strictEqual(fs.existsSync('todosBetter.csv'), true);
+      let expectedFileContents = "Title,Completed\nsave a CSV,false\n";
+      let content = fs.readFileSync("todosBetter.csv").toString();
+      assert.strictEqual(content, expectedFileContents);
+    });
+  });
+});
+
+describe("saveToFileBetter()", function() {
+  it("best - should save a single TODO using promise with async and await", async function() {
       let todos = new Todos();
       todos.add("save a CSV");
-      todos.saveToFile((err) => {
-          assert.strictEqual(fs.existsSync('todos.csv'), true);
-          let expectedFileContents = "Title,Completed\nsave a CSV,false\n";
-          let content = fs.readFileSync("todos.csv").toString();
-          assert.strictEqual(content, expectedFileContents);
-          done(err);
-      });
+      await todos.saveToFileBetter();
+      assert.strictEqual(fs.existsSync('todosBetter.csv'), true);
+      let expectedFileContents = "Title,Completed\nsave a CSV,false\n";
+      let content = fs.readFileSync("todosBetter.csv").toString();
+      assert.strictEqual(content, expectedFileContents);
   });
 });

@@ -51,8 +51,20 @@ readFileSync() - to read the file synchronously
   end the test with call to done() callback, so Mocha knows to stop testing that case
 done(err); 
   fail the test if an error occurred
-  
+
 ## side note
 fs module functions are asyncronous by default, but have synchronous counterparts
 that end with Sync in their name
 readFileSync returns a buffer object (binary data) so use toString so can compare
+
+### asynchronous tests with promises (more prevalent)
+const fs = require('fs').promises;
+remove done() callback from arguments in it
+to test promise, put assertion code in the then() function
+we don't have a catch() function for if the promise is rejected, and mocha can detect when a promise is reqjected and if so, automatically fails the test
+use return on the promise being tested
+
+### use promises with async/await to keep less verbose
+result - not have to create multiple then functions to handle successful results
+after use async keyword - can get any future results with await keyword
+can then use promises without having to use then() or catch() functions

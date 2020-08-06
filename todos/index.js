@@ -1,4 +1,7 @@
+//for callbacks asynch
 const fs = require('fs');
+//for promises asynch
+const fsp = fs.promises;
 
 class Todos {
   constructor() {
@@ -45,6 +48,17 @@ class Todos {
 
     fs.writeFile('todos.csv', fileContents, callback);
   }
+
+  saveToFileBetter() {
+    let fileContents = 'Title,Completed\n';
+    this.todos.forEach((todo) => {
+      fileContents += `${todo.title},${todo.completed}\n`
+    });
+
+    return fsp.writeFile('todosBetter.csv', fileContents);
+  }
+
 }
+
 
 module.exports = Todos;
