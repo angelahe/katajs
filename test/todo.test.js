@@ -1,4 +1,4 @@
-const Todos = require('./index');
+const Todos = require('../todos/index');
 const assert = require('assert').strict;
 const fs = require('fs');
 /*const fsp = require('fs').promises; */

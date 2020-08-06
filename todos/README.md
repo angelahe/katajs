@@ -17,7 +17,10 @@ $ node
 ```
 
 ## Using mocha to test
-
+see package.json to specify the test file location
+```
+npm test
+```
 ### load todo module and Node's assert module 
 const Todos = require('./index');
 const assert = require('assert').strict;
