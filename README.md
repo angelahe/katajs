@@ -34,3 +34,7 @@ https://mochajs.org/#installation
 
 ## next to read
 https://www.digitalocean.com/community/tutorials/how-to-write-asynchronous-code-in-node-js
+
+https://www.digitalocean.com/community/conceptual_articles/understanding-this-bind-call-and-apply-in-javascript
+
+https://www.digitalocean.com/community/tutorials/how-to-create-a-web-server-in-node-js-with-the-http-module

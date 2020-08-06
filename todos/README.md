@@ -68,3 +68,15 @@ use return on the promise being tested
 result - not have to create multiple then functions to handle successful results
 after use async keyword - can get any future results with await keyword
 can then use promises without having to use then() or catch() functions
+
+### use hooks to improve test cases
+config environment before and after a test
+add within a describe() function block
+  before - once before the first test begins
+  beforeEach - run before every test case
+  after - once after the last test case is complete
+  afterEach - run after every test case
+
+add beforeEach to the test block
+switch reference to this
+cleanup after every test with afterEach

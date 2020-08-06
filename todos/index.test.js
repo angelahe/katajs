@@ -80,3 +80,36 @@ describe("saveToFileBetter()", function() {
       assert.strictEqual(content, expectedFileContents);
   });
 });
+
+// adding hooks into saveToFileBetter test
+describe("saveToFileBetter()", function () {
+  beforeEach(function () {
+    this.todos = new Todos();
+    this.todos.add("save a CSV");
+  });
+
+  afterEach(function () {
+    if (fs.existsSync("todosBetter.csv")) {
+        fs.unlinkSync("todosBetter.csv");
+    }
+  });
+
+  it("best - should save a single TODO without error using promise and hooks", async function () {
+    await this.todos.saveToFileBetter();
+
+    assert.strictEqual(fs.existsSync('todosBetter.csv'), true);
+    let expectedFileContents = "Title,Completed\nsave a CSV,false\n";
+    let content = fs.readFileSync("todosBetter.csv").toString();
+    assert.strictEqual(content, expectedFileContents);
+  });
+
+  it("should save a single TODO that's completed", async function () {
+    this.todos.complete("save a CSV");  
+    await this.todos.saveToFileBetter();
+
+    assert.strictEqual(fs.existsSync('todosBetter.csv'), true);
+    let expectedFileContents = "Title,Completed\nsave a CSV,true\n";
+    let content = fs.readFileSync("todosBetter.csv").toString();
+    assert.strictEqual(content, expectedFileContents);
+  });
+});
