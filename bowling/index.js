@@ -35,7 +35,7 @@ class Game {
         this.frames[this.index-1].bonus = pins;
         // deal with case of 3 strikes in a row bonus
         if (this.index > 1) {
-          if (this.frames[this.index-2].pins == 10) {
+          if (this.frames[this.index-2].roll1 == 10) {
             this.frames[this.index-2].bonus+=10;
           }
         }
