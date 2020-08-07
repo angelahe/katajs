@@ -1,4 +1,5 @@
 const Game = require('../bowling/index');
+const { globalAgent } = require('http');
 const assert = require('assert').strict;
 
 describe("bowling: roll()", function() {
@@ -54,8 +55,30 @@ describe("bowling: roll()", function() {
 });
 
 describe("bowling: roll()", function() {
-  it.skip("should be able to detect a strike and record bonus points", function() {
-    
+  it("should be able to detect a strike and record bonus points", function() {
+    let game = new Game();
+    game.roll(10);
+    assert.strictEqual(game.listFrames().length, 1);
+    assert.deepStrictEqual(game.listFrames(), 
+      [{ frame: 1, roll1: 10, roll2: 0, bonus: 0 }]
+    );
+    assert.strictEqual(game.bonus, 'strike'); 
+    game.roll(6);
+    assert.deepStrictEqual(game.listFrames(), 
+      [{ frame: 1, roll1: 10, roll2: 0, bonus: 6 },
+       { frame: 2, roll1: 6, roll2: 0, bonus: 0 }]
+    ); 
+    assert.strictEqual(game.index, 1);
+    assert.strictEqual(game.newframe, false);
+    assert.strictEqual(game.bonus, 'strike');
+    game.roll(3);
+    assert.deepStrictEqual(game.listFrames(), 
+     [{ frame: 1, roll1: 10, roll2: 0, bonus: 9 },
+      { frame: 2, roll1: 6, roll2: 3, bonus: 0 }]
+    );  
+    assert.strictEqual(game.index, 2);
+    assert.strictEqual(game.newframe, true);
+    assert.strictEqual(game.bonus, '');  
   });
 });
 

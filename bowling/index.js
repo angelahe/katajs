@@ -25,15 +25,39 @@ class Game {
         roll2: 0,
         bonus: 0,
       }
-      this.newframe = false;
-      this.frames.push(newframe);
+      //deal with spare bonus
       if (this.bonus == 'spare') {
         this.frames[this.index-1].bonus = pins;
         this.bonus = '';
       }
+      // deal with case of 2 strikes in a row bonus
+      if (this.bonus == 'strike') {
+        this.frames[this.index-1].bonus = pins;
+        // deal with case of 3 strikes in a row bonus
+        if (this.index > 1) {
+          if (this.frames[this.index-2].pins == 10) {
+            this.frames[this.index-2].bonus+=10;
+          }
+        }
+      }
+      
+      if (pins == 10) {
+        this.bonus = 'strike';
+        this.index++;
+      }
+      else {
+        this.newframe = false;
+      }
+      this.frames.push(newframe);
+      
     }
     else {
       this.frames[this.index].roll2 = pins;
+      //deal with 2nd ball bonus after strike
+      if (this.bonus == 'strike') {
+        this.frames[this.index-1].bonus+=pins;
+        this.bonus = '';
+      }
       this.newframe = true;
       if (this.frames[this.index].roll1 + this.frames[this.index].roll2 == 10)
         this.bonus = 'spare';
