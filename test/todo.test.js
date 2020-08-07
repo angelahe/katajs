@@ -1,7 +1,6 @@
 const Todos = require('../todos/index');
 const assert = require('assert').strict;
 const fs = require('fs');
-/*const fsp = require('fs').promises; */
 
 describe("integration test", function() {
   it("should be able to add and complete TODOs", function() {

@@ -20,7 +20,7 @@ $ ./node_modules/mocha/bin/mocha
 ## setup test script in package.json
 ```
 "scripts": {
-      "test": "mocha"
+      "test": "mocha -name '*test.js' --recursive"
     },
 ```
 
@@ -40,3 +40,16 @@ https://www.digitalocean.com/community/conceptual_articles/understanding-this-bi
 https://www.digitalocean.com/community/tutorials/how-to-create-a-web-server-in-node-js-with-the-http-module
 
 https://mochajs.org/#installation
+
+node.js
+mochajs.org
+
+## notes on node
+npm init
+npm ls            - list dependencies
+npm ls --depth 0  - list dependencies at top of tree 
+npm outdated
+npm install
+npm audit         - for known security flaws
+npm update
+npm uninstall
