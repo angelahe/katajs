@@ -2,7 +2,7 @@
 class Game {
   constructor() {
     this.frames = [];
-    this.currentFrame = 1;
+    this.index = 0;
     this.newframe = true;
     this.bonus = '';
   }
@@ -20,7 +20,7 @@ class Game {
   roll(pins) {
     if (this.newframe == true) {
       let newframe = {
-        frame: this.currentFrame,
+        frame: this.index+1,
         roll1: pins,
         roll2: 0,
         bonus: 0,
@@ -29,7 +29,8 @@ class Game {
       this.frames.push(newframe);
     }
     else {
-      this.frames[this.currentFrame].roll2 = pins;
+      this.frames[this.index].roll2 = pins;
+      this.frames[this.index].bonus = 0;
       this.newframe = true;
     }
 

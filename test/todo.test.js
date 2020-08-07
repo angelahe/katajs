@@ -2,7 +2,7 @@ const Todos = require('../todos/index');
 const assert = require('assert').strict;
 const fs = require('fs');
 
-describe("integration test", function() {
+describe("todo: integration test", function() {
   it("should be able to add and complete TODOs", function() {
     let todos = new Todos();
     assert.strictEqual(todos.list().length, 0);
@@ -30,7 +30,7 @@ describe("integration test", function() {
   });
 });
 
-describe("complete()", function() {
+describe("todo: complete()", function() {
   it("should fail if there are no TODOs", function() {
     let todos = new Todos();
     const expectedError = new Error("You have no TODOs stored. Why don't you add one first?");
@@ -41,7 +41,7 @@ describe("complete()", function() {
   });
 });
 
-describe("saveToFile()", function() {
+describe("todo: saveToFile()", function() {
   it("should save a single TODO", function(done) {
     let todos = new Todos();
     todos.add("save a CSV");
@@ -55,7 +55,7 @@ describe("saveToFile()", function() {
   });
 });
 
-describe("saveToFileBetter()", function() {
+describe("todo: saveToFileBetter()", function() {
   it("better - should save a single TODO using promise", function() {
     let todos = new Todos();
     todos.add("save a CSV");
@@ -68,7 +68,7 @@ describe("saveToFileBetter()", function() {
   });
 });
 
-describe("saveToFileBetter()", function() {
+describe("todo: saveToFileBetter()", function() {
   it("best - should save a single TODO using promise with async and await", async function() {
       let todos = new Todos();
       todos.add("save a CSV");
@@ -81,7 +81,7 @@ describe("saveToFileBetter()", function() {
 });
 
 // adding hooks into saveToFileBetter test
-describe("saveToFileBetter()", function () {
+describe("todo: saveToFileBetter()", function () {
   beforeEach(function () {
     this.todos = new Todos();
     this.todos.add("save a CSV");
