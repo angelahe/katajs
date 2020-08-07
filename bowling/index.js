@@ -5,6 +5,7 @@ class Game {
     this.index = 0;
     this.newframe = true;
     this.bonus = '';
+    this.gameover = false;
   }
 
   listFrames() {
@@ -21,7 +22,25 @@ class Game {
     return totalscore;
   }
 
+  catchrollerrors(pins) {
+    x = pins;
+    try {
+      if (x == '') throw "need a number for your roll of 0 to 10 pins";
+      if (isNaN(x)) throw "not a number, need a roll of 0 to 10 pins";
+      x = Number(x);
+      if(x < 0) throw "roll is too low, need a roll of 0 to 10 pins";
+      if(x > 10) throw "roll is too high, need a roll of 0 to 10 pins";
+    }
+    catch(err) {
+      console.log("Input is " + err);
+      x = -1;
+    }
+
+    return(x);
+  }
+
   roll(pins) {
+    numpins = 
     if (this.newframe == true) {
       let newframe = {
         frame: this.index+1,
