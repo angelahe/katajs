@@ -13,6 +13,10 @@ class Game {
 
   score() {
     let totalscore = 0;
+    if (this.index != 10) {
+      throw new Error('Game is not finished yet!  Finish the game to get the final score');
+    }
+
     // do a map to total frames[].roll1 + frames[].roll2 + frames[].bonus
     return totalscore;
   }
