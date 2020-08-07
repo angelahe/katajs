@@ -27,11 +27,18 @@ class Game {
       }
       this.newframe = false;
       this.frames.push(newframe);
+      if (this.bonus == 'spare') {
+        this.frames[this.index-1].bonus = pins;
+        this.bonus = '';
+      }
     }
     else {
       this.frames[this.index].roll2 = pins;
-      this.frames[this.index].bonus = 0;
       this.newframe = true;
+      if (this.frames[this.index].roll1 + this.frames[this.index].roll2 == 10)
+        this.bonus = 'spare';
+      this.index++;
+      
     }
 
   }
