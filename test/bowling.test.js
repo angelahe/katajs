@@ -173,11 +173,11 @@ describe("bowling: checkroll(pins)", function() {
 */
 
     game.checkroll();
-    assert.strictEqual(game.error, expectedErrorA);
+    assert.strictEqual(game.error, expectedErrorB);
     game.checkroll('a');
-    assert.strictEqual(game.error, expectedErrorA);
+    assert.strictEqual(game.error, expectedErrorB);
     game.checkroll('NaN');
-    assert.strictEqual(game.error, expectedErrorA);
+    assert.strictEqual(game.error, expectedErrorB);
     game.checkroll(NaN);
     assert.strictEqual(game.error, expectedErrorA);
     game.checkroll('');
@@ -196,8 +196,25 @@ describe("bowling: checkroll(pins)", function() {
 });
 
 describe("bowling: roll()", function() {
-  it.skip("should be able to throw error if game is over", function() {
-    
+  it("should be able to throw error if game is over", function() {
+    let game = new Game();
+    const expectedError = "game is over, see your score";
+
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(9);
+    game.roll(0);
+    game.roll(1);
+    console.log('index is ' + game.index);
+    console.log('bonus is '+ game.bonus);
+    assert.strictEqual(game.error, expectedError);
   });
 });
 
