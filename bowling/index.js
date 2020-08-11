@@ -25,6 +25,8 @@ class Game {
 
   checkroll(pins) {
     let x = pins;
+    //reset error
+    this.error = '';
     try { 
       if (x == '') throw new Error("not a number, need a roll of 0 to 10 pins");
       if (isNaN(x)) throw new Error("not a number, need a roll of 0 to 10 pins");
@@ -43,13 +45,11 @@ class Game {
     finally {
       return(x);
     }
-    // TODO: check for if 2nd roll would be more than 10
   }
 
   roll(pins) {
     let pinnum = this.checkroll(pins);
     if (pinnum !== -1) {
-      this.error = '';
       if (this.newframe == true) {
         let newframe = {
           frame: this.index+1,

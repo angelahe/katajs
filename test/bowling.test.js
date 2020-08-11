@@ -141,7 +141,7 @@ describe("bowling: roll(pins)", function() {
 });
 
 describe("bowling: roll(pins)", function() {
-  it.skip("should handle a spare in the last frame and allow 1 bonus ball", function() {
+  it("should handle a spare in the last frame and allow 1 bonus ball", function() {
     
   });
 });
