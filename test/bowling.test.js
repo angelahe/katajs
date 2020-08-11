@@ -135,14 +135,54 @@ describe("bowling: roll(pins)", function() {
 });
 
 describe("bowling: roll(pins)", function() {
-  it.skip("should handle a strike in the last frame and allow 2 bonus balls", function() {
+  it("should handle a strike in the last frame and allow 2 bonus balls", function() {
+    let game = new Game();
+    const expectedError = "game is over, see your score"; 
     
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(8);
+    game.roll(1);
+    game.roll(10);
+    game.roll(8);
+    game.roll(2);
+    assert.strictEqual(game.frames[9].bonus, 10);
+    assert.strictEqual(game.gameover, true);
+    game.roll(3);
+    assert.strictEqual(game.error, expectedError);
   });
 });
 
 describe("bowling: roll(pins)", function() {
   it("should handle a spare in the last frame and allow 1 bonus ball", function() {
-    
+    let game = new Game();
+    const expectedError = "game is over, see your score";
+
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(8);
+    game.roll(1);
+    game.roll(9);
+    game.roll(1);
+    assert.strictEqual(game.bonus, 'spare');
+    game.roll(10);
+    assert.strictEqual(game.frames[9].bonus, 10);
+    assert.strictEqual(game.gameover, true);
+    game.roll(3);
+    assert.strictEqual(game.error, expectedError);
+
   });
 });
 
@@ -151,26 +191,6 @@ describe("bowling: checkroll(pins)", function() {
     let game = new Game(); 
     const expectedErrorA = "not a number, need a roll of 0 to 10 pins";
     const expectedErrorB = "not an integer, need a roll of 0 to 10 pins";
-
-    /* if I just do throw this works but now I put the error message in the object 
-
-    assert.throws(() => {
-      game.checkroll('a');
-    }, expectedErrorA);
-
-    assert.throws(() => {
-      game.checkroll('NaN');
-    }, expectedErrorA);
-    this.error = expectedErrorA;
-
-    assert.throws(() => {
-      game.checkroll(NaN);
-    }, expectedErrorA);
-    
-    assert.throws(() => {
-      game.checkroll('');
-    }, expectedErrorB);
-*/
 
     game.checkroll();
     assert.strictEqual(game.error, expectedErrorB);

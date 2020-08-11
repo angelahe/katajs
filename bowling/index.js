@@ -7,6 +7,7 @@ class Game {
     this.bonus = '';
     this.gameover = false;
     this.error = '';
+    this.endbonus = 0;
   }
 
   listFrames() {
@@ -95,9 +96,21 @@ class Game {
           this.bonus = 'spare';
         this.index++;
       }
-      //check if gameover
-      if ((this.index > 9) && (this.bonus === '')) {
-        this.gameover = true;
+      //deal with last frame, max 2 bonus balls
+      if (this.index > 9) {
+        if (this.bonus === '') {
+          this.gameover = true;
+        }
+        if (this.endbonus > 2) {
+          this.gameover = true;
+        }
+        //cleanup extra frames
+        if (this.gameover === true) {
+          while (this.frames.length > 10) {
+            this.frames.pop();
+          }
+        }
+        this.endbonus++;
       }
       
     }
