@@ -208,12 +208,14 @@ describe("bowling: roll()", function() {
     game.roll(10);
     game.roll(10);
     game.roll(10);
-    game.roll(10);
+    game.roll(8);
+    game.roll(1);
     game.roll(9);
     game.roll(0);
     game.roll(1);
     console.log('index is ' + game.index);
     console.log('bonus is '+ game.bonus);
+    console.log('game over? '+ this.gameover);
     assert.strictEqual(game.error, expectedError);
   });
 });

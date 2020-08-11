@@ -30,15 +30,13 @@ class Game {
     try { 
       if (x === '') throw new Error("not a number, need a roll of 0 to 10 pins");
       if (Number.isNaN(x) && (Number(x) !== 0)) throw new Error("not a number, need a roll of 0 to 10 pins");
-       
-     // if (Number.isNaN(x) && (Number(x) != 0)) throw new Error("not a number, need a roll of 0 to 10 pins");
       if (!Number.isInteger(x)) throw new Error("not an integer, need a roll of 0 to 10 pins");
       x = Number(x);
       if(x < 0) throw new Error("is too low, need a roll of 0 to 10 pins");
       if(x > 10) throw new Error("is too high, need a roll of 0 to 10 pins");
       if(!this.newframe && (this.frames[this.index].roll1 + x > 10))
         throw new Error("too many pins for this frame, not to exceed 10");
-      if(this.gameover) throw new Error("game is over, see your score");
+      if(this.gameover === true) throw new Error("game is over, see your score");
     }
     catch(err) {
       console.log('pins is '+ pins );
@@ -98,8 +96,9 @@ class Game {
         this.index++;
       }
       //check if gameover
-      if (this.index > 10 && this.bonus === '')
-        this.gameover;
+      if ((this.index > 9) && (this.bonus === '')) {
+        this.gameover = true;
+      }
       
     }
   }
