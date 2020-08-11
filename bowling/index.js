@@ -6,6 +6,7 @@ class Game {
     this.newframe = true;
     this.bonus = '';
     this.gameover = false;
+    this.error = '';
   }
 
   listFrames() {
@@ -23,41 +24,44 @@ class Game {
   }
 
   checkroll(pins) {
-    x = pins;
-    try {
-      if (x == '') throw "need a number for your roll of 0 to 10 pins";
-      if (isNaN(x)) throw "not a number, need a roll of 0 to 10 pins";
+    let x = pins;
+    try { 
+      if (x == '') throw new Error("not a number, need a roll of 0 to 10 pins");
+      if (isNaN(x)) throw new Error("not a number, need a roll of 0 to 10 pins");
       x = Number(x);
-      if(x < 0) throw "roll is too low, need a roll of 0 to 10 pins";
-      if(x > 10) throw "roll is too high, need a roll of 0 to 10 pins";
+      if(x < 0) throw new Error("is too low, need a roll of 0 to 10 pins");
+      if(x > 10) throw new Error("is too high, need a roll of 0 to 10 pins");
     }
     catch(err) {
-      console.log("Input is " + err);
+      console.error(err.name + ': ' + err.message);
       x = -1;
+      this.error = err.message;
+    }
+    finally {
+      return(x);
     }
     // TODO: check for if 2nd roll would be more than 10
-    
-    return(x);
   }
 
   roll(pins) {
-    pinnum = checkroll(pins);
-    if (pinnum != -1) {
+    let pinnum = this.checkroll(pins);
+    if (pinnum !== -1) {
+      this.error = '';
       if (this.newframe == true) {
         let newframe = {
           frame: this.index+1,
-          roll1: pins,
+          roll1: pinnum,
           roll2: 0,
           bonus: 0,
         }
         //deal with spare bonus
         if (this.bonus == 'spare') {
-          this.frames[this.index-1].bonus = pins;
+          this.frames[this.index-1].bonus = pinnum;
           this.bonus = '';
         }
         // deal with case of 2 strikes in a row bonus
         if (this.bonus == 'strike') {
-          this.frames[this.index-1].bonus = pins;
+          this.frames[this.index-1].bonus = pinnum;
           // deal with case of 3 strikes in a row bonus
           if (this.index > 1) {
             if (this.frames[this.index-2].roll1 == 10) {
@@ -65,7 +69,7 @@ class Game {
             }
           }
         }
-        if (pins == 10) {
+        if (pinnum == 10) {
           this.bonus = 'strike';
           this.index++;
         }
@@ -75,10 +79,10 @@ class Game {
         this.frames.push(newframe);
       }
       else {
-        this.frames[this.index].roll2 = pins;
+        this.frames[this.index].roll2 = pinnum;
         //deal with 2nd ball bonus after strike
         if (this.bonus == 'strike') {
-          this.frames[this.index-1].bonus+=pins;
+          this.frames[this.index-1].bonus+=pinnum;
           this.bonus = '';
         }
         this.newframe = true;
