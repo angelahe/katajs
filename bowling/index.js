@@ -28,9 +28,12 @@ class Game {
     try { 
       if (x == '') throw new Error("not a number, need a roll of 0 to 10 pins");
       if (isNaN(x)) throw new Error("not a number, need a roll of 0 to 10 pins");
+      if (!Number.isInteger(x)) throw new Error("not an integer, need a roll of 0 to 10 pins");
       x = Number(x);
       if(x < 0) throw new Error("is too low, need a roll of 0 to 10 pins");
       if(x > 10) throw new Error("is too high, need a roll of 0 to 10 pins");
+      if(!this.newframe && (this.frames[this.index].roll1 + x > 10))
+        throw new Error("too many pins for this frame, not to exceed 10");
     }
     catch(err) {
       console.error(err.name + ': ' + err.message);
