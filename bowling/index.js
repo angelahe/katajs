@@ -16,8 +16,15 @@ class Game {
 
   score() {
     let totalscore = 0;
-    if (this.index != 10) {
+    if (!this.gameover) {
       throw new Error('Game is not finished yet!  Finish the game to get the final score');
+    }
+    else {
+      for(let i = 0; i < 10; i++) {
+        totalscore += this.frames[i].roll1;
+        totalscore += this.frames[i].roll2;
+        totalscore += this.frames[i].bonus;
+      }
     }
 
     // do a map to total frames[].roll1 + frames[].roll2 + frames[].bonus
@@ -98,10 +105,14 @@ class Game {
       }
       //deal with last frame, max 2 bonus balls
       if (this.index > 9) {
-        if (this.bonus === '') {
+        console.log('index is ' + this.index);
+        console.log('gameover is ' + this.gameover);
+        console.log('endbonus is ' + this.endbonus);
+        console.log('bonus is ' + this.bonus);
+        if ((this.bonus === '') || ((this.frames[9].roll2 !== 0)&&(this.endbonus !==0))) {
           this.gameover = true;
         }
-        if (this.endbonus > 2) {
+        if (this.endbonus === 2) {
           this.gameover = true;
         }
         //cleanup extra frames

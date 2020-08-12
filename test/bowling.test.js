@@ -268,8 +268,22 @@ describe("bowling: roll(pins)", function() {
 });
 
 describe("bowling: score()", function() {
-  it.skip("should be able to return the final score", function() {
+  it("should be able to return the final score", function() {
+    let game = new Game();
     
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    assert.strictEqual(game.score(), 300);
   });
 });
 
