@@ -41,6 +41,8 @@ https://www.digitalocean.com/community/tutorials/how-to-create-a-web-server-in-n
 
 https://mochajs.org/#installation
 
+https://vanillajstoolkit.com/boilerplates/#Revealing-Module-Pattern
+
 node.js
 mochajs.org
 

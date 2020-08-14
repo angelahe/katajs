@@ -107,8 +107,3 @@ describe('add()', function () {
 });
 
 ### stub out tests and mark as pending
-describe("bowling: ", function() {
-  it.skip("should be able to ", function() {
-    
-  });
-});

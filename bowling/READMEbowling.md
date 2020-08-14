@@ -27,4 +27,4 @@ int score() returns the total score for that game.
  fitnesse.org
  www.junit.org
 
- 
+https://github.com/hontas/bowling-game-kata 
